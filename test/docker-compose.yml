@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      mongo_net:
+    ports:
+      - 80:1337
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:3.2
+    ports:
+      - "27017:27017"
+    networks:
+      mongo_net:
+        ipv4_address: 172.16.0.1
+    command: mongod -port 27017 --bind_ip 127.0.0.1,172.16.0.1 
+
+
+  mongo-seed:
+    build: ./mongo-seed
+    networks:
+      mongo_net:
+    depends_on:
+      - mongodb
+
+networks:
+  mongo_net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.16.0.0/24
+        gateway: 172.16.0.254
+
+volumes:
+  mongo-volume:

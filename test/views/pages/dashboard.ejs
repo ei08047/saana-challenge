@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Activity Overlord | Welcome back, <%= me.name %>!</title>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/angular-toastr.css">
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <!--STYLES END-->
+
+
+  </head>
+  <body ng-app="DashboardModule" ng-controller="DashboardController" ng-cloak>
+
+    <!-- container = Fixed-width container container-fluid = full-width -->
+    <div class="container-fluid">
+
+              <a href="/logout">sign-out</a>
+
+
+      <h1>This is the Dashboard</h1>
+      <p><%= records[0].quote %> </p>
+      <p><%= records[1].quote %> </p>
+      <p><%= records[2].quote %> </p>
+      <p><%= records[3].quote %> </p>
+
+    </div>
+    <!--SCRIPTS-->
+    <script src="/dependencies/sails.io.js"></script>
+    <script src="/dependencies/angular.js"></script>
+    <script src="/dependencies/angular-animate.js"></script>
+    <script src="/dependencies/bootstrap.js"></script>
+    <script src="/dependencies/compareTo.module.js"></script>
+    <script src="/js/public/signup/SignupModule.js"></script>
+    <script src="/js/private/dashboard/DashboardController.js"></script>
+    <script src="/js/private/dashboard/DashboardModule.js"></script>
+    <script src="/js/public/signup/SignupController.js"></script>
+    <!--SCRIPTS END-->
+
+  </body>
+</html>
