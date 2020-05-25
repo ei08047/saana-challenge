@@ -22,6 +22,9 @@
 module.exports = {
 
 
+jwtSecret='test';
+jwtExpires= "2 days";
+
   /**************************************************************************
   *                                                                         *
   * Tell Sails what database(s) it should use in production.                *
