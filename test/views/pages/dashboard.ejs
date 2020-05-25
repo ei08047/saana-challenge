@@ -21,10 +21,10 @@
 
 
       <h1>This is the Dashboard</h1>
-      <p><%= records[0].quote %> </p>
-      <p><%= records[1].quote %> </p>
-      <p><%= records[2].quote %> </p>
-      <p><%= records[3].quote %> </p>
+
+      <% _.each(records, function(record){ %>
+      <p><%= record.quote %> </p>
+      <% })%>
 
     </div>
     <!--SCRIPTS-->

@@ -5,6 +5,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var jwt = require('jsonwebtoken');
+
 module.exports = {
 
   /**
@@ -42,8 +44,16 @@ else {
 
         success: function (){
           sails.log('correct password');
+          var token = jwt.sign({user: user.id}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
           // Store user id in the user session
           req.session.me = user.id;
+          /*
+              res.cookie('sailsjwt', token, {
+              signed: true,
+              // domain: '.yourdomain.com', // always use this in production to whitelist your domain
+              maxAge: sails.config.jwtExpires
+            })
+            */
 
           // All done- let the client know that everything worked.
               return res.json({
@@ -87,7 +97,14 @@ else {
               // Log user in
               req.session.me = newUser.id;
               sails.log('welcome new user');
-              // Send back the id of the new user
+/*
+              var token = jwt.sign({user: user.id}, sails.config.jwtSecret, {expiresIn: sails.config.jwtExpires})
+              res.cookie('sailsjwt', token, {
+                signed: true,
+                // domain: '.yourdomain.com', // always use this in production to whitelist your domain
+                maxAge: sails.config.jwtExpires
+              })
+*/
               // Send back the id of the new user
               return res.json({
                 id: newUser.id
@@ -119,6 +136,7 @@ else {
 
       // Wipe out the session (log out)
       req.session.me = null;
+      res.clearCookie('sailsjwt');
 
       // Either send a 200 OK or redirect to the home page
       return res.backToHomePage();
