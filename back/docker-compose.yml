@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+  mongo:
+    container_name: mongo-server
+    image: mongo
+    ports:
+      - "27017:27017"
+
+
+  mongo-seed:
+    build: ./mongo-seed
+    links:
+      - mongo
+    depends_on:
+      - mongo 
+
+
+  backend:
+    container_name: back
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/back'
+      - '/back/node_modules'
+    ports:
+      - '1337:1337'
+    links:
+      - mongo
+    depends_on:
+      - mongo
