@@ -1,0 +1,12 @@
+<div class="container-fluid">
+	<form [formGroup]="logoutForm" #formDir="ngForm" (ngSubmit)="onSubmit()" class="navbar-form navbar-right">
+
+	  <button type="submit" class="btn btn-success">Logout</button>
+	</form>
+</div>
+<h2>WELCOME</h2>
+
+<div *ngFor="let dummy of dummyData">
+	<p> {{dummy.quote}}</p>
+</div>
+
