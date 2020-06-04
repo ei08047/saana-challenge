@@ -169,8 +169,8 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-     onlyAllowOrigins: [
-     ],
+    onlyAllowOrigins: [
+    ],
 
 
     /***************************************************************************
@@ -242,7 +242,7 @@ module.exports = {
     * (https://sailsjs.com/config/http)                                        *
     *                                                                          *
     ***************************************************************************/
-     trustProxy: false,
+    trustProxy: false,
 
   },
 

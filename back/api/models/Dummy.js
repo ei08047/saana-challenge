@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-        quote: {
+    quote: {
       type: 'string',
       required: true
     },
