@@ -24,21 +24,30 @@ There is no failure behaviour on the UI, but the responses from the server provi
 
 The backend consists in 2 modules: Users and Dummy.
 
-the backend accepts 4 routes:
+the backend accepts 5 routes:
 - 'POST /signup': 'UsersController.signup',
 - 'POST /login': 'UsersController.login',
 - 'GET /logout': 'UsersController.logout',
 - 'GET /dummy': 'DummyController.getData'
-
+- 'GET /csrfToken': { action: 'security/grant-csrf-token' }
 
 login and signup are public but the others are kept private using the policy "isAuthenticated" which calls the helper method "verifyToken"
 
+For some reason that i could not figure "csrfToken" always returns a empty csrf token.
+
 ## deployment & dockerization
+
+The containerization process depends on two docker-compose files which are called upon launching launcher.sh.
+One refers to the frontend server and the other refers to the backend server and includes the sails application, mongo server and mongo seed script using mongoimport.
+
+I also provide a cleaner.sh script that stops and removes all containers and their volumes.
+
 
 ## user guide
 
 - open a terminal in saana-challenge folder
 - run ./launcher.sh
 - open your browser and navigate to http://0.0.0.0:4200/
+
 
 you can register a new user, login with a previously create user, logout and view quotes loaded from Dummy collection

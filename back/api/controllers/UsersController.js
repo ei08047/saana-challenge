@@ -14,7 +14,6 @@ module.exports = {
    * match a real user in the database, sign in to Activity Overlord.
    */
   login: async function (req, res) {
-
     // Try to look up user using the provided email address
     var user = await Users.findOne({
       email: req.param('email')
@@ -52,7 +51,7 @@ else {
 
         success: function (){
           sails.log('correct password');
-          var token = jwt.sign({user: user.id}, "secret")
+          var token = jwt.sign({user: user.id}, sails.config.tokenSecret)
           // Store user id in the user session
           req.session.me = user.id;
         
@@ -118,7 +117,7 @@ else {
               // Log user in
               req.session.me = newUser.id;
               sails.log('welcome new user');
-              var token = jwt.sign({user: newUser.id},"secret")
+              var token = jwt.sign({user: newUser.id},sails.config.tokenSecret)
               sails.log(token)
               res.cookie('sailsjwt', token, {
                 signed: true,
@@ -140,27 +139,6 @@ else {
    */
   logout: function (req, res) {
   	  	sails.log("logout:");
-    // Look up the user record from the database which is
-    // referenced by the id in the user session (req.session.me)
-    /*
-    
-    Users.findOne(req.session.me, function foundUser(err, user) {
-      if (err) {
-      	return res.json({
-                data: err
-              });
-      }
-
-      // If session refers to a user who no longer exists, still allow logout.
-      if (!user) {
-        sails.log.verbose('Session refers to a user who no longer exists.');
-        return res.backToHomePage();
-      }
-
-      // Wipe out the session (log out)
-      req.session.me = null;
-      */
-      // Either send a 200 OK or redirect to the home page
       req.session.destroy(function(err) {
           setTimeout(function(){
       return res.json({});

@@ -23,7 +23,8 @@ module.exports.routes = {
   'POST /signup': 'UsersController.signup',
   'POST /login': 'UsersController.login',
   'GET /logout': 'UsersController.logout',
-  'GET /dummy': 'DummyController.getData'
+  'GET /dummy': 'DummyController.getData',
+  'GET /csrfToken': { action: 'security/grant-csrf-token' }
 
 
   /***************************************************************************
